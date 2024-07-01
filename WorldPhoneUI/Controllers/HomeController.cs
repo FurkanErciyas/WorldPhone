@@ -44,7 +44,7 @@ namespace WorldPhoneUI.Controllers
                 if (_signInManager.IsSignedIn(User))
                 {
                     if (userIsCustomer)
-                        return RedirectToAction("Index", "Customer", new { area = "Customer" });
+                        return RedirectToAction("Index", "Home", new { area = "Customer" });
                     if (userIsAdmin)
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }

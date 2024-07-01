@@ -12,7 +12,7 @@ using WorldPhone.DAL.Context;
 namespace DAL.Migrations
 {
     [DbContext(typeof(WorldPhoneDbContext))]
-    [Migration("20240626145056_Initial_Create")]
+    [Migration("20240701140712_Initial_Create")]
     partial class Initial_Create
     {
         /// <inheritdoc />
@@ -107,6 +107,10 @@ namespace DAL.Migrations
 
                     b.Property<int>("OS")
                         .HasColumnType("int");
+
+                    b.Property<string>("PicturePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PixelDensity")
                         .HasColumnType("int");

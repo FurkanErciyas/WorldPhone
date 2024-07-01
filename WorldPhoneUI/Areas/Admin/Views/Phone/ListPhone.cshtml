@@ -1,0 +1,59 @@
+﻿@model List<SmartPhone>
+
+@{
+    ViewData["Title"] = "Phones";
+}
+<div>
+    <a class="btn btn-outline-primary" asp-controller="Phone" asp-action="ListPhone">Phones</a>
+</div>
+
+
+<table class="table table-striped table-bordered table-hover table-sm mt-2">
+    <thead>
+        <tr>
+            <th class="text-center align-middle">Image</th>
+            <th class="text-center align-middle">Model</th>
+            <th class="text-center align-middle">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var phone in Model)
+        {
+            <tr>
+                <td class="text-center align-middle">
+                    <img src="~/img/@phone.PicturePath" width="80" height="80" alt="@phone.Model" />
+                </td>
+                <td class="text-center align-middle">@phone.Model</td>
+                <td class="text-center align-middle">@phone.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* @section Scripts
+{
+    <script>
+        function dlt(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("Delete", "Package")" + "/" + id,
+                        data: id,
+                        success: function (data) {
+                            location.reload();
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+}  *@

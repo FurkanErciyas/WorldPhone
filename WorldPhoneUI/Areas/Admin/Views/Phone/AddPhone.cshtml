@@ -1,0 +1,163 @@
+﻿@model AddPhoneDTO
+
+<div class="container">
+    <form asp-action="AddPhone" method="post" enctype="multipart/form-data">
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title">Create a Package</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="Model"></label>
+                    <input asp-for="Model" class="form-control">
+                    <span class="text-danger" asp-validation-for="Model"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ScreenSize"></label>
+                    <input asp-for="ScreenSize" class="form-control">
+                    <span class="text-danger" asp-validation-for="ScreenSize"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ScreenDurability"></label>
+                    <input asp-for="ScreenDurability" class="form-control">
+                    <span class="text-danger" asp-validation-for="ScreenDurability"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ScreenTechnology"></label>
+                    <input asp-for="ScreenTechnology" class="form-control">
+                    <span class="text-danger" asp-validation-for="ScreenTechnology"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ScreenResolution"></label>
+                    <input asp-for="ScreenResolution" class="form-control">
+                    <span class="text-danger" asp-validation-for="ScreenResolution"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PixelDensity"></label>
+                    <input asp-for="PixelDensity" class="form-control">
+                    <span class="text-danger" asp-validation-for="PixelDensity"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BatteryCapacity"></label>
+                    <input asp-for="BatteryCapacity" class="form-control">
+                    <span class="text-danger" asp-validation-for="BatteryCapacity"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ChargePower"></label>
+                    <input asp-for="ChargePower" class="form-control">
+                    <span class="text-danger" asp-validation-for="ChargePower"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BackCameraResolution"></label>
+                    <input asp-for="BackCameraResolution" class="form-control">
+                    <span class="text-danger" asp-validation-for="BackCameraResolution"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FrontCameraResolution"></label>
+                    <input asp-for="FrontCameraResolution" class="form-control">
+                    <span class="text-danger" asp-validation-for="FrontCameraResolution"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Chipset"></label>
+                    <input asp-for="Chipset" class="form-control">
+                    <span class="text-danger" asp-validation-for="Chipset"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Length"></label>
+                    <input asp-for="Length" class="form-control">
+                    <span class="text-danger" asp-validation-for="Length"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Width"></label>
+                    <input asp-for="Width" class="form-control">
+                    <span class="text-danger" asp-validation-for="Width"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Thickness"></label>
+                    <input asp-for="Thickness" class="form-control">
+                    <span class="text-danger" asp-validation-for="Thickness"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Weight"></label>
+                    <input asp-for="Weight" class="form-control">
+                    <span class="text-danger" asp-validation-for="Weight"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Stock"></label>
+                    <input asp-for="Stock" class="form-control">
+                    <span class="text-danger" asp-validation-for="Stock"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InternalStorage"></label>
+                    <input asp-for="InternalStorage" class="form-control">
+                    <span class="text-danger" asp-validation-for="InternalStorage"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RAM"></label>
+                    <input asp-for="RAM" class="form-control">
+                    <span class="text-danger" asp-validation-for="RAM"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control">
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OS"></label>
+                    <select asp-for="OS" class="form-control" asp-items="@(new SelectList(Enum.GetValues(typeof(OS))))"></select>
+                    <span class="text-danger" asp-validation-for="ChargeType"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ChargeType"></label>
+                    <select asp-for="ChargeType" class="form-control" asp-items="@(new SelectList(Enum.GetValues(typeof(ChargeTypeEnum))))"></select>
+                    <span class="text-danger" asp-validation-for="ChargeType"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Brand"></label>
+                    <select asp-for="BrandId" class="form-control">
+                        @foreach (var brand in Model.Brands)
+                        {
+                            <option value="@brand.Id">@brand.BrandName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="BrandId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-control d-none" asp-for="Image"></label>
+                    <div class="my-2 d-none" id="preview">
+                        <img src="#" alt="Preview" height="200" />
+                    </div>
+                    <input asp-for="Image" type="file" class="form-control-file">
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <button class="btn btn-success">Create</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    @*<partial name="_AddImageScriptsPartial" />*@
+    <script>
+        // Add image and preview
+        var img = $("#preview > img")[0];
+        $("#Image").change(function (event) {
+            var imgFile = this.files[0];
+            if (imgFile && imgFile.type.startsWith("image/")) {
+                img.src = URL.createObjectURL(imgFile);
+                $("#preview").removeClass("d-none");
+            }
+            else {
+                img.src = "#";
+                $("#preview").addClass("d-none");
+            }
+        });
+    </script>
+}

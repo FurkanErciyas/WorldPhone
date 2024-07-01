@@ -1,4 +1,7 @@
+using BLL.Interfaces;
+using BLL.Services;
 using DAL.Context;
+using ENTITIES.Profiles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,6 +16,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ICustomer, CustomerService>();
+builder.Services.AddScoped<IPhone, PhoneService>();
+builder.Services.AddScoped<IBrand, BrandService>();
+
+builder.Services.AddAutoMapper(typeof(PhoneProfile));
+builder.Services.AddAutoMapper(typeof(BrandProfile));
 
 var app = builder.Build();
 
@@ -34,7 +44,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "Customer",
-    pattern: "{area:exists}/{controller=Customer}/{action=Index}/{id?}"
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 
 app.MapControllerRoute(

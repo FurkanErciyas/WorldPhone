@@ -1,15 +1,11 @@
 ﻿using ENTITIES.Enums;
-using System;
-using System.Collections.Generic;
+using ENTITIES.Models;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ENTITIES.Models
+namespace ENTITIES.DTOS.PhoneDTO
 {
-    public class SmartPhone : BaseEntity
+    public class AddPhoneDTO
     {
         [Required]
         public string? Model { get; set; }
@@ -44,8 +40,9 @@ namespace ENTITIES.Models
         public OS OS { get; set; }
         public int RAM { get; set; }
         public decimal Price { get; set; }
-        public string PicturePath { get; set; }
         public int BrandId { get; set; }
-        public Brand? Brand { get; set; }
+        public IFormFile Image { get; set; }
+        public Brand Brand { get; set; }
+        public List<Brand> Brands { get; set; }
     }
 }

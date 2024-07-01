@@ -105,6 +105,10 @@ namespace DAL.Migrations
                     b.Property<int>("OS")
                         .HasColumnType("int");
 
+                    b.Property<string>("PicturePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PixelDensity")
                         .HasColumnType("int");
 

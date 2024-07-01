@@ -64,7 +64,7 @@ namespace DAL.Context
                 Stock = 9,
                 Status = StatusEnum.Active,
                 BrandId = 1,
-
+                PicturePath = "iphone_13.jpg"
             };
 
             var smartPhone_2 = new SmartPhone()
@@ -91,7 +91,8 @@ namespace DAL.Context
                 Price = 71.999m,
                 Stock = 14,
                 Status = StatusEnum.Active,
-                BrandId = 1
+                BrandId = 1,
+                PicturePath = "iphone_15_pro_max.jpg"
             };
 
             var smartPhone_3 = new SmartPhone()
@@ -118,7 +119,8 @@ namespace DAL.Context
                 Price = 69.999m,
                 Stock = 17,
                 Status = StatusEnum.Active,
-                BrandId = 2
+                BrandId = 2,
+                PicturePath = "pura_70_ultra.jpg"
             };
 
             var smartPhone_4 = new SmartPhone()
@@ -145,7 +147,8 @@ namespace DAL.Context
                 Price = 79.999m,
                 Stock = 21,
                 Status = StatusEnum.Active,
-                BrandId = 2
+                BrandId = 2,
+                PicturePath = "mate_x3.jpeg"
             };
 
             db.SmartPhones.AddRange(smartPhone_1, smartPhone_2, smartPhone_3, smartPhone_4);

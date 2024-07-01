@@ -13,6 +13,6 @@ namespace ENTITIES.Models
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
-        public DataStatusEnum DataStatus { get; set; }
+        public DataStatusEnum DataStatus { get; set; } = DataStatusEnum.Created;
     }
 }

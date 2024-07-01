@@ -76,6 +76,21 @@ namespace WorldPhoneUI.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
+            [StringLength(50)]
+            [Display(Name = "Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(50)]
+            [Display(Name = "Surname")]
+            public string LastName { get; set; }
+
+            [Required]
+            [StringLength(250)]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -114,6 +129,11 @@ namespace WorldPhoneUI.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.Address = Input.Address;
+                await _userManager.AddToRoleAsync(user, "Customer");
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
