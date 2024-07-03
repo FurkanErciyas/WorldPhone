@@ -1,14 +1,14 @@
-﻿@model AddPhoneDTO
+﻿@model EditPhoneDTO
 
 @{
-    ViewData["Title"] = "Add Phone";
+    ViewData["Title"] = "Edit Phone";
 }
 
 <div class="container">
-    <form asp-action="AddPhone" method="post" enctype="multipart/form-data">
+    <form asp-action="EditPhone" method="post" enctype="multipart/form-data">
         <div class="card card-warning">
             <div class="card-header">
-                <h3 class="card-title">Create a Package</h3>
+                <h3 class="card-title">Edit a Phone</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -134,13 +134,13 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control d-none" asp-for="Image"></label>
-                    <div class="my-2 d-none" id="preview">
-                        <img src="#" alt="Preview" height="200" />
+                    <div class="my-2" id="preview">
+                        <img src="~/img/@Model.PicturePath" alt="Preview" height="200" />
                     </div>
                     <input asp-for="Image" type="file" class="form-control-file">
                     <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
-                <button class="btn btn-success">Create</button>
+                <button class="mt-2 btn btn-success">Edit</button>
             </div>
         </div>
     </form>
@@ -149,19 +149,37 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     @*<partial name="_AddImageScriptsPartial" />*@
-    <script>
+@*     <script>
         // Add image and preview
         var img = $("#preview > img")[0];
         $("#Image").change(function (event) {
             var imgFile = this.files[0];
             if (imgFile && imgFile.type.startsWith("image/")) {
                 img.src = URL.createObjectURL(imgFile);
-                $("#preview").removeClass("d-none");
             }
             else {
                 img.src = "#";
                 $("#preview").addClass("d-none");
             }
+        });
+    </script> *@
+
+    <script>
+        $(document).ready(function () {
+            // Dosya seçildiğinde veya değiştiğinde
+            $('input[type="file"]').change(function () {
+                var input = this;
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#preview img').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    // Dosya seçilmediğinde mevcut resmi göster
+                    $('#preview img').attr('src', '/img/@Model.PicturePath');
+                }
+            });
         });
     </script>
 }

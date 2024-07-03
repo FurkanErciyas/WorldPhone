@@ -14,6 +14,7 @@
             <th class="text-center align-middle">Image</th>
             <th class="text-center align-middle">Model</th>
             <th class="text-center align-middle">Price</th>
+            <th class="text-center align-middle">Operationz</th>
         </tr>
     </thead>
     <tbody>
@@ -25,15 +26,19 @@
                 </td>
                 <td class="text-center align-middle">@phone.Model</td>
                 <td class="text-center align-middle">@phone.Price</td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-success" asp-controller="Phone" asp-action="EditPhone" asp-route-id="@phone.Id"><i class="fas fa-pencil-alt mr-1"></i>Edit</a>
+                    <a class="btn btn-outline-danger btn-sil" data-id="@phone.Id" onclick="deletePhone(@phone.Id)"><i class="fas fa-trash mr-1"></i>Delete</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-@* @section Scripts
+@section Scripts
 {
     <script>
-        function dlt(id) {
+        function deletePhone(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -46,7 +51,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "GET",
-                        url: "@Url.Action("Delete", "Package")" + "/" + id,
+                        url: "@Url.Action("DeletePhone", "Phone")" + "/" + id,
                         data: id,
                         success: function (data) {
                             location.reload();
@@ -56,4 +61,4 @@
             })
         }
     </script>
-}  *@
+} 
