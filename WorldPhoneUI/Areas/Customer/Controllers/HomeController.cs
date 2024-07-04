@@ -1,4 +1,5 @@
 ﻿using BLL.Interfaces;
+using ENTITIES.DTOS.PhoneDTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,15 +9,21 @@ namespace WorldPhoneUI.Areas.Customer.Controllers
     [Authorize(Roles = "Customer")]
     public class HomeController : Controller
     {
-        private readonly ICustomer _customer;
+        private readonly IPhoneService _phone;
 
-        public HomeController(ICustomer customer)
+        public HomeController(IPhoneService phone)
         {
-            _customer = customer;
+            _phone = phone;
         }
         public IActionResult Index()
         {
-            return View(_customer.GetBrands());
+            var phonesDTO = _phone.GetPhonesDTO();
+            return View(phonesDTO);
+        }
+        public IActionResult GetPhonesByBrand(string brandName)
+        {
+
+            return View("Index", _phone.GetPhonesByBrand(brandName));
         }
     }
 }

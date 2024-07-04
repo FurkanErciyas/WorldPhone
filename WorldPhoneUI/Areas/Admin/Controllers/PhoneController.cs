@@ -1,5 +1,7 @@
 ﻿using BLL.Interfaces;
+using ENTITIES.DTOS.BrandDTO;
 using ENTITIES.DTOS.PhoneDTO;
+using ENTITIES.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,20 +11,18 @@ namespace WorldPhoneUI.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class PhoneController : Controller
     {
-        private readonly IPhone _phone;
-        private readonly IBrand _brand;
+        private readonly IPhoneService _phone;
         private readonly IWebHostEnvironment _env;
 
-        public PhoneController(IPhone phone, IBrand brand, IWebHostEnvironment env)
+        public PhoneController(IPhoneService phone, IWebHostEnvironment env)
         {
             _phone = phone;
-            _brand = brand;
             _env = env;
         }
 
         public IActionResult AddPhone()
         {
-            var brands = _brand.GetAllBrands();
+            var brands = _phone.GetAllBrands();
             var model = new AddPhoneDTO
             {
                 Brands = brands
@@ -50,7 +50,7 @@ namespace WorldPhoneUI.Areas.Admin.Controllers
         public IActionResult EditPhone(int id)
         {
             var phoneDTO = _phone.EditPhoneDTO(id);
-            var brands = _brand.GetAllBrands();
+            var brands = _phone.GetAllBrands();
             phoneDTO.Brands = brands;
             return View(phoneDTO);
         }
@@ -94,6 +94,17 @@ namespace WorldPhoneUI.Areas.Admin.Controllers
             return View();
         }
 
+        public IActionResult AddBrand()
+        {
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult AddBrand(AddBrandDTO brandDTO)
+        {
+            _phone.AddBrand(brandDTO);
+            return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+        }
 
     }
 }

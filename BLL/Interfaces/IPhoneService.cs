@@ -1,4 +1,5 @@
-﻿using ENTITIES.DTOS.PhoneDTO;
+﻿using ENTITIES.DTOS.BrandDTO;
+using ENTITIES.DTOS.PhoneDTO;
 using ENTITIES.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Interfaces
 {
-    public interface IPhone
+    public interface IPhoneService
     {
         void AddPhone(AddPhoneDTO phone, string fileName);
         List<SmartPhone> GetAllPhones();
@@ -16,5 +17,9 @@ namespace BLL.Interfaces
         SmartPhone GetPhone(int id);
         void EditPhone(EditPhoneDTO phone);
         EditPhoneDTO EditPhoneDTO(int id);
+        PhonesDTO GetPhonesByBrand(string BrandName);
+        PhonesDTO GetPhonesDTO();
+        List<Brand> GetAllBrands();
+        void AddBrand(AddBrandDTO brand);
     }
 }

@@ -5,9 +5,17 @@ using ENTITIES.Profiles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Globalization;
 using WorldPhone.DAL.Context;
 using WorldPhone.ENTITIES.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var cultureInfo = new CultureInfo("tr-TR");
+cultureInfo.NumberFormat.CurrencySymbol = "?";
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
 var connectionString = builder.Configuration.GetConnectionString("WorldPhoneDbContextConnection") ?? throw new InvalidOperationException("Connection string 'WorldPhoneDbContextConnection' not found.");
 
 builder.Services.AddDbContext<WorldPhoneDbContext>(options => options.UseSqlServer(connectionString));
@@ -17,9 +25,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<ICustomer, CustomerService>();
-builder.Services.AddScoped<IPhone, PhoneService>();
-builder.Services.AddScoped<IBrand, BrandService>();
+builder.Services.AddScoped<IPhoneService, PhoneService>();
 
 builder.Services.AddAutoMapper(typeof(PhoneProfile));
 builder.Services.AddAutoMapper(typeof(BrandProfile));
